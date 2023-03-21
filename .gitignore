@@ -1,0 +1,11 @@
+*.gradle
+Chat/gradlew
+*.bat
+Chat/.idea
+*.class
+Chat/build/tmp/compileJava/source-classes-mapping.txt
+Chat/gradle/wrapper/gradle-wrapper.jar
+Rest/.idea/
+*.pyc
+*.properties
+Chat/bin/

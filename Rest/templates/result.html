@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+    <p></p>
+    <div id="json">
+        {{items}}
+    </div>
+    <p></p>
+    <p>EARTHQUAKES:</p>
+    <p>MEAN: {{ mean }}</p>
+    <p>MAX: {{ max }}</p>
+    <p></p>
+    <table id="table">
+    </table>
+    <script>
+        let data = document.getElementById("json").innerHTML;
+        data = JSON.parse(data.replaceAll("'", '"'));
+        document.getElementById("json").innerHTML = "";
+        let table = document.getElementById("table");
+        for (let key in data) {
+            let row = document.createElement("tr");
+            row.innerHTML = `<td>${key}</td><td>${data[key]}</td>`;
+            table.appendChild(row);
+        }
+    </script>
+</body>
+</html>

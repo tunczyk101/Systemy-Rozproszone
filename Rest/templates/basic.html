@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Facts</title>
+    </head>
+    <body>
+        <form id="basic" method="POST" action="/facts/">
+            <label for="days">Number of days to check for earthquakes:</label><br/>
+            <input type="text" id="days" name="days" required>
+            <p></p>
+            <label for="date">Date to check:</label><br/>
+            <input type="date" id="date" name="date" required>
+            <p></p>
+            <label for="number">Number of facts about cats (1 - 4):</label><br/>
+            <input type="text" id="number" name="number" required>
+            <p></p>
+            <label for="language">Choose language (english, german, ukrainian, spanish, filipino, urdu):</label><br/>
+            <input type="text" id="language" name="language" required>
+            <p></p>
+            <input class="submit" type="submit" value="Submit">
+        </form>
+    </body>
+</html>
