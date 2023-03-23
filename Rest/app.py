@@ -11,7 +11,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates/")
 
 users = {"xxx": "xxx", "cat": "lover"}
-languages = {"english": "eng", "german": "ger", "ukrainian": "ukr", "spanish": "esp", "filipino": "fil", "urdu": "urd"}
+languages = {"english": "eng", "german": "ger", "ukrainian": "ukr", "spanish": "esp", "filipino": "fil"}
 quotes: [] = []
 logged = False
 
@@ -122,13 +122,18 @@ async def facts(request: Request, days: int = Form(...), date: str = Form(...), 
             all = int(response.json())
             dates = get_list(date, days)
             days_resp = {}
-            for d in dates:
-                print(d)
-                resp = requests.get(f"https://earthquake.usgs.gov/fdsnws/event/1/count?starttime={d}&endtime={d}")
-                days_resp[d] = int(resp.json())
-                print(type(days_resp.get(d)))
+            temp = 0
+            for d in reversed(dates):
+                # print(d)
+                resp = requests.get(f"https://earthquake.usgs.gov/fdsnws/event/1/count?starttime={start}&endtime={d}")
+                days_resp[d] = int(resp.json()) - temp
+                temp = int(resp.json())
+                # print("temp:", temp)
+                # print(type(days_resp.get(d)))
+                # print(resp.json())
             mean = all / (days + 1)
-            max_date = max([(d, val) for i, val in days_resp.items()], key=lambda x: x[1])
+            max_date = max([(d, val) for d, val in days_resp.items()], key=lambda x: x[1])
+            # print(max_date)
 
         except Exception as e:
             return templates.TemplateResponse("item.html", context={'request': request,
