@@ -9,3 +9,8 @@ Rest/.idea/
 *.pyc
 *.properties
 Chat/bin/
+*.iml
+middleware_lab_4/.idea/
+middleware_lab_4/Ice/.idea/.name
+*.xml
+*.jar
