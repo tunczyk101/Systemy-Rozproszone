@@ -26,7 +26,7 @@ public class IceServer {
 			// 3. Utworzenie serwanta/serwantów
 			CalcI calcServant1 = new CalcI();
 			CalcI calcServant2 = new CalcI();
-//			CalcI calcServant3 = new CalcI();
+			CalcI calcServant3 = new CalcI();
 
 			// 4. Dodanie wpisów do tablicy ASM, skojarzenie nazwy obiektu (Identity) z serwantem
 			adapter.add(calcServant1, new Identity("calc11", "calc"));

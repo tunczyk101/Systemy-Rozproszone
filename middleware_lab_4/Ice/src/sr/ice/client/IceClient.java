@@ -6,6 +6,7 @@ import com.zeroc.Ice.*;
 
 import java.io.IOException;
 import java.lang.Exception;
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -24,8 +25,8 @@ public class IceClient {
 			//ObjectPrx base1 = communicator.propertyToProxy("Calc1.Proxy");
 
 			// 2. Uzyskanie referencji obiektu - to samo co powyżej, ale mniej ładnie
-			ObjectPrx base1 = communicator.stringToProxy("calc/calc11:tcp -h 127.0.0.2 -p 10000 -z : udp -h 127.0.0.2 -p 10000 -z"); //opcja -z włącza możliwość kompresji wiadomości
-			ObjectPrx base3 = communicator.stringToProxy("calc/calc33:tcp -h 127.0.0.2 -p 10000 -z : udp -h 127.0.0.2 -p 10000 -z");
+			ObjectPrx base1 = communicator.stringToProxy("calc/calc11:tcp -h 127.0.0.2 -p 10000 : udp -h 127.0.0.2 -p 10000 -z"); //opcja -z włącza możliwość kompresji wiadomości
+			ObjectPrx base3 = communicator.stringToProxy("calc/calc33:tcp -h 127.0.0.2 -p 10000 -z : udp -h 127.0.0.2 -p 10000");
 
 			// 3. Rzutowanie, zawężanie (do typu Calc)
 			CalcPrx obj1 = CalcPrx.checkedCast(base1);
@@ -39,6 +40,8 @@ public class IceClient {
 			java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 			long r;
 			A a;
+			float av;
+			long[] array;
 
 			// 4. Wywołanie zdalnych operacji i zmiana trybu proxy dla obiektu obj1
 			do {
@@ -72,6 +75,21 @@ public class IceClient {
 							a = new A((short) 11, 22, 33.0f, "ala ma kota");
 							for (int i = 0; i < 10; i++) obj1.op(a, (short) 44);
 							System.out.println("DONE");
+							break;
+						case "avg":
+							array = new long[]{800000, 700000};
+							av = obj1.avg(array);
+							System.out.println("RESULT = " + av);
+							break;
+						case "avg0":
+							array = new long[]{};
+							try {
+								av = obj1.avg(array);
+								System.out.println("RESULT = " + av);
+							}
+							catch (Exception e){
+								System.out.println("Array size must be greater than 0");
+							}
 							break;
 						case "add-with-ctx": //wysłanie dodatkowych danych stanowiących kontekst wywołania
 							Map<String, String> map = new HashMap<>();
