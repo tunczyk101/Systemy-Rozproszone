@@ -28,6 +28,7 @@
 import logging
 import numpy as np
 import ray
+import time
 
 if ray.is_initialized:
     ray.shutdown()
@@ -60,6 +61,7 @@ print(val)
 results = ray.get([ray.put(i) for i in range(10)])
 print(results)
 
+
 # Passing Objects by Reference
 
 # Ray object references can be freely passed around a Ray application. This means
@@ -72,6 +74,7 @@ print(results)
 def echo(x):
     print(f"current value of argument x: {x}")
 
+
 # Define some variables
 x = list(range(10))
 obj_ref_x = ray.put(x)
@@ -82,11 +85,15 @@ y = 25
 # be de-referenced automatically, so the task only sees its value.
 
 # send y as value argument
+print("y - start")
 echo.remote(y)
+time.sleep(10)
+print("y - end")
 
-# send a an object reference
-# note that the echo function deferences it
+# send an object reference
+# note that the echo function differences it
 echo.remote(obj_ref_x)
+time.sleep(10)
 
 # Pass-by-reference
 # When a parameter is passed inside a Python list or as any other data structure,
@@ -102,44 +109,41 @@ x = list(range(20))
 obj_ref_x = ray.put(x)
 # Echo will not automaticall de-reference it
 echo.remote({"obj": obj_ref_x})
+time.sleep(10)
 
 echo.remote([obj_ref_x])
 
 # What about long running tasks?
 
-# Sometimes, you may have tasks that are long running, past their expected
+# Sometimes, you may have tasks that are long-running, past their expected
 # times due to some problem, maybe blocked on accessing a variable in the
 # object store. How do you exit or terminate it? Use a timeout!
 #
-# Now let's set a timeout to return early from an attempted access of a remote
+# Now let's set a timeout to return early from attempted access of a remote
 # object that is blocking for too long...
 
-import time
 
 @ray.remote
-def long_running_function ():
+def long_running_function():
     time.sleep(10)
     return 42
 
+
 # You can control how long you want to wait for the task to finish
 
-def time_out_funtion():
+def time_out_function():
     from ray.exceptions import GetTimeoutError
-    obj_ref=long_running_function.remote( )
-    try :
-        ray.get(obj_ref,timeout=6)
-    except GetTimeoutError :
+    obj_ref = long_running_function.remote()
+    try:
+        ray.get(obj_ref, timeout=6)
+    except GetTimeoutError:
         print("`get` timed out")
 
+
 import cProfile
+
 print('start task')
-cProfile.run("time_out_funtion()")
-
-
-
-
-
-
+cProfile.run("time_out_function()")
 
 ray.shutdown()
 
