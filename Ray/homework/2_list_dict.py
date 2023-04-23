@@ -58,3 +58,5 @@ cProfile.run("process_dict.remote(huge_dict_ref)")
 print("huge list and dictionary processing")
 # cProfile.run("print(ray.get(process_list_and_dict.remote(huge_dict_ref, huge_list_ref)))")
 cProfile.run("process_list_and_dict.remote(huge_dict_ref, huge_list_ref)")
+
+ray.shutdown()
