@@ -16,7 +16,6 @@ if ray.is_initialized:
     ray.shutdown()
 ray.init(logging_level=logging.ERROR)
 
-
 # ray.init(address='auto', ignore_reinit_error=True, logging_level=logging.ERROR)
 
 CALLERS = ["A", "B", "C"]
@@ -28,22 +27,22 @@ class MethodStateCounter:
         self.invokers_count = {i: 0 for i in CALLERS}
         self.invokers_values = {i: [] for i in CALLERS}
 
-    def invoke(self, name):
+    def invoke(self, caller_name):
         # pretend to do some work here
         time.sleep(0.5)
         # update times invoked
-        self.invokers_count[name] += 1
-        value = random.randint(5, 25)
-        self.invokers_values[name].append(value)
+        self.invokers_count[caller_name] += 1
+        val = random.randint(5, 25)
+        self.invokers_values[caller_name].append(val)
         # return the state of that invoker
-        return value
+        return val
 
-    def get_invoker_count(self, name):
+    def get_invoker_count(self, caller_name):
         # return the state of the named invoker
-        return self.invokers_count[name]
+        return self.invokers_count[caller_name]
 
-    def get_invoker_values(self, name):
-        return self.invokers_values[name]
+    def get_invoker_values(self, caller_name):
+        return self.invokers_values[caller_name]
 
     def get_all_invoker_counts(self):
         # return the state of all invokers
@@ -69,10 +68,3 @@ for _ in range(5):
 
 # Fetch the count of all callers
 print(ray.get(worker_invoker.get_all_invokers_values.remote()))
-
-# 3.3 Take a look on implement parallel Pi computation
-# based on https://docs.ray.io/en/master/ray-core/examples/highly_parallel.html
-#
-# Implement calculating pi as a combination of actor (which keeps the
-# state of the progress of calculating pi as it approaches its final value)
-# and a task (which computes candidates for pi)
