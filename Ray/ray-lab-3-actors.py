@@ -292,7 +292,7 @@ while True :
 # 3- Get state of all invokers
 # 3.2 Modify method invoke to return a random int value between [5, 25]
 
-# 3.3 Take a look on implement parralel Pi computation
+# 3.3 Take a look on implement parallel Pi computation
 # based on https://docs.ray.io/en/master/ray-core/examples/highly_parallel.html
 #
 # Implement calculating pi as a combination of actor (which keeps the
