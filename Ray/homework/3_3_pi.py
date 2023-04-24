@@ -14,7 +14,8 @@ import logging
 
 if ray.is_initialized:
     ray.shutdown()
-ray.init(logging_level=logging.ERROR)
+# ray.init(logging_level=logging.ERROR)
+ray.init(address='auto', ignore_reinit_error=True, logging_level=logging.ERROR)
 
 
 

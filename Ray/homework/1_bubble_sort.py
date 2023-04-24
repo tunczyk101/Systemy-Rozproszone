@@ -7,7 +7,6 @@ import ray
 # Exercise 1.1)Try using local bubble sort and remote bubble sort,
 # show difference
 
-
 if ray.is_initialized:
     ray.shutdown()
 # ray.init(logging_level=logging.ERROR)
