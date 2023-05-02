@@ -9,10 +9,10 @@ import ray
 
 if ray.is_initialized:
     ray.shutdown()
-# ray.init(logging_level=logging.ERROR)
+ray.init(logging_level=logging.ERROR)
 
 
-ray.init(address='auto', ignore_reinit_error=True, logging_level=logging.ERROR)
+# ray.init(dashboard_port="8001", dashboard_host="0.0.0.0", ignore_reinit_error=True, logging_level=logging.ERROR)
 
 
 def bubble_sort(arr):
