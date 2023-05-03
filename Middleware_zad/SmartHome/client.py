@@ -1,9 +1,9 @@
 import Ice
 
-from handlers.bulbulator.bulbulator_handle import BulbulatorHandler
-from handlers.camera.camera_handler import CameraHandler
-from handlers.camera.ptz_camera_handler import PTZCameraHandler
-from handlers.smartTv.smart_tv_handler import SmartTvHandler
+from client.handlers.bulbulator.bulbulator_handle import BulbulatorHandler
+from client.handlers.camera.camera_handler import CameraHandler
+from client.handlers.camera.ptz_camera_handler import PTZCameraHandler
+from client.handlers.smartTv.smart_tv_handler import SmartTvHandler
 
 config_file = "config.client"
 
@@ -87,4 +87,6 @@ def run(args):
                 del smart_devices[device.name]
 
 
+if __name__ == "__main__":
+    run(None)
 

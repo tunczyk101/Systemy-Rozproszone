@@ -1,8 +1,8 @@
 import Ice
 
-from generated_python.smarthome_ice import PTZCameraPrx, RangeError, AlreadyOnError, PTZ
-from handlers.basic_functions import test_connection
-from handlers.camera.camera_handler import CameraHandler
+# from generated_python import *
+from client.handlers.basic_functions import test_connection
+from client.handlers.camera.camera_handler import CameraHandler
 
 
 class PTZCameraHandler(CameraHandler):

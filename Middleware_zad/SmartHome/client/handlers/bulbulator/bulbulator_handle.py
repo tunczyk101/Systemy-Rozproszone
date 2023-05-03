@@ -1,7 +1,6 @@
+from client.handlers.basic_functions import test_connection
+from generated_python import *
 import Ice
-
-from generated_python.smarthome_ice import BulbulatorPrx
-from handlers.basic_functions import test_connection
 
 
 class BulbulatorHandler:

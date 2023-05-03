@@ -1,19 +1,19 @@
 import Ice
 
-from generated_python.smarthome_ice import CameraPrx, AlreadyOffError, AlreadyOnError
-from handlers.basic_functions import test_connection
+from generated_python.SmartHomeDevices import *
+from client.handlers.basic_functions import test_connection
 
 
-class CameraHandler:
+class SmartTvHandler:
     def __init__(self, proxy, communicator):
         self.proxy = proxy
         self.communicator = communicator
         self._obj = None
         self.device_type = "SmartTv"
-        self.actions = ["takePicture",
-                        "startRecording",
-                        "stopRecording",
-                        "isRecording",
+        self.actions = ["changeChannel 1",
+                        "changeChannel 8",
+                        "changeChannel 30",
+                        "getCurrentChannel",
                         "getName"]
         Ice.initialize()
 
@@ -21,7 +21,7 @@ class CameraHandler:
     def obj(self):
         if not self._obj:
             base = self.communicator.stringToProxy(self.proxy)
-            self._obj = CameraPrx.checkedCast(base)
+            self._obj = SmartTVPrx.checkedCast(base)
 
         return self._obj
 
@@ -32,43 +32,50 @@ class CameraHandler:
 
     def handle_action(self, action):
         match action:
-            case "takePicture":
+            case "changeChannel 1":
                 try:
                     test_connection(self)
-                    print(self.obj.takePicture())
-                except Ice.ObjectNotExistException:
-                    print("Servant object wasn't found")
-            case "startRecording":
-                try:
-                    test_connection(self)
-                    print(self.obj.startRecording())
-                except AlreadyOnError as e:
+                    print(self.obj.changeChannel(1))
+                except RangeError as e:
                     print(f"Error: {e.reason}")
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
-
-            case "stopRecording":
+                    return
+            case "changeChannel 8":
                 try:
                     test_connection(self)
-                    print(self.obj.stopRecording())
-                except AlreadyOffError as e:
+                    print(self.obj.changeChannel(8))
+                except RangeError as e:
                     print(f"Error: {e.reason}")
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
-            case "isRecording":
+                    return
+            case "changeChannel 30":
                 try:
                     test_connection(self)
-                    print(self.obj.isRecording())
+                    print(self.obj.changeChannel(30))
+                except RangeError as e:
+                    print(f"Error: {e.reason}")
+                    return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
+                    return
+            case "getCurrentChannel":
+                try:
+                    test_connection(self)
+                    print(self.obj.getCurrentChannel())
+                except Ice.ObjectNotExistException:
+                    print("Servant object wasn't found")
+                    return
             case "getName":
                 try:
                     test_connection(self)
                     print(self.obj.getName())
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
+                    return
             case other:
                 print("???")
 

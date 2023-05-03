@@ -1,4 +1,4 @@
-from ice import Ice
+import Ice
 from time import sleep
 
 

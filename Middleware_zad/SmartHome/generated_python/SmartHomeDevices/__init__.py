@@ -5,6 +5,6 @@ import Ice
 Ice.updateModule("SmartHomeDevices")
 
 # Modules:
-import smarthome_ice
+import generated_python.smarthome_ice
 
 # Submodules:
