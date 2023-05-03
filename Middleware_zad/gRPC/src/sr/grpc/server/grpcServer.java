@@ -1,20 +1,19 @@
 package sr.grpc.server;
 
+import io.grpc.Server;
+import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
+import io.grpc.protobuf.services.ProtoReflectionService;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
-import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
 //import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
 //import "google.golang.org/grpc/reflection"
-
 
 public class grpcServer 
 {
@@ -37,6 +36,7 @@ public class grpcServer
 		//You will want to employ flow-control so that the queue doesn't blow up your memory. You can cast StreamObserver to CallStreamObserver to get flow-control API
 		server = /*ServerBuilder*/NettyServerBuilder.forAddress(socket).executor(Executors.newFixedThreadPool(16))
 				.addService(new CalculatorImpl())
+				.addService(ProtoReflectionService.newInstance())
 				//.addService(new CalculatorImpl())
 				//.addService(new AdvancedCalculatorImpl())
 				.addService(new StreamTesterImpl())

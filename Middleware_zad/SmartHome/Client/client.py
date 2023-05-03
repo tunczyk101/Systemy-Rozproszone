@@ -87,16 +87,16 @@ def run(args):
                 print(f"Incorrect port for device {device.name}, removing it from available devices.")
                 del smart_devices[device.name]
         print("ending...")
-        smart_devices.get("bulbulator1").destroy()
-        # for device in smart_devices.values():
-        #     if device.communicator is not None:
-        #         print('destroy')
-        #         try:
-        #             device.communicator.destroy()
-        #         except Exception as e:
-        #             print(f"Error: {e.args}")
-        #             traceback.print_exc()
-        #             status = 1
+        # smart_devices.get("bulbulator1").destroy()
+        for device in smart_devices.values():
+            if device.communicator is not None:
+                print('destroy')
+                try:
+                    device.communicator.destroy()
+                except Exception as e:
+                    print(f"Error: {e.args}")
+                    traceback.print_exc()
+                    status = 1
         if communicator is not None:
             print('destroy')
             try:
@@ -104,7 +104,6 @@ def run(args):
             except Exception:
                 traceback.print_exc()
                 status = 1
-
 
         exit(status)
 

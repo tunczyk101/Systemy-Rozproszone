@@ -1,0 +1,16 @@
+grpcurl -plaintext localhost:50050 list
+grpcurl -plaintext localhost:50050 list calculator.Calculator
+
+grpcurl -plaintext localhost:50050 describe calculator.Calculator.NoArithmeticOp
+grpcurl -plaintext localhost:50050 describe calculator.Calculator.Add
+
+grpcurl -plaintext localhost:50050 describe .calculator.ArethmeticOpArguments
+grpcurl -plaintext localhost:50050 describe .calculator.NoArithmeticArguments
+
+grpcurl -plaintext -msg-template localhost:50050 describe .calculator.ArithmeticOpArguments
+grpcurl -plaintext -msg-template localhost:50050 describe .calculator.NoArithmeticArguments
+
+"{\"info\": \"info\", \"number1\": 0, \"number2\": 0, \"thisType\": \"MAGICIAN\", \"args\": [\"arg\"]}"
+grpcurl -plaintext -d "{\"info\": \"info\", \"number1\": 8, \"number2\": 7, \"thisType\": \"MAGICIAN\", \"args\": [\"arg\"]}" localhost:50050 calculator.Calculator/NoArithmeticOp
+
+

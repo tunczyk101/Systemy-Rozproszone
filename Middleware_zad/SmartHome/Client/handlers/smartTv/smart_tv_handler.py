@@ -1,4 +1,5 @@
 from SmartHomeDevices import *
+# from SmartHomeDevices_ice import RangeError
 from handlers.basic_functions import test_connection
 # from smarthome_ice import SmartTVPrx, RangeError
 
@@ -38,7 +39,8 @@ class SmartTvHandler:
                     test_connection(self)
                     print(self.obj.changeChannel(1))
                 except RangeError as e:
-                    print(f"Error: {e.reason}")
+                    print(f"Error: RangeError")
+                    print(e)
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
@@ -48,7 +50,8 @@ class SmartTvHandler:
                     test_connection(self)
                     print(self.obj.changeChannel(8))
                 except RangeError as e:
-                    print(f"Error: {e.reason}")
+                    print(f"Error: RangeError")
+                    print(e)
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
@@ -58,7 +61,8 @@ class SmartTvHandler:
                     test_connection(self)
                     print(self.obj.changeChannel(30))
                 except RangeError as e:
-                    print(f"Error: {e.reason}")
+                    print(f"Error: RangeError")
+                    print(e)
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")

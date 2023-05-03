@@ -45,7 +45,8 @@ class PTZCameraHandler(CameraHandler):
                     ptz = PTZ(pan=20, tilt=88)
                     print(self.obj.setPTZ(ptz))
                 except RangeError as e:
-                    print(f"Error: {e.reason}")
+                    print(f"Error: RangeError")
+                    print(e)
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
@@ -55,7 +56,8 @@ class PTZCameraHandler(CameraHandler):
                     ptz = PTZ(pan=0, tilt=0, zoom=0)
                     print(self.obj.setPTZ(ptz))
                 except RangeError as e:
-                    print(f"Error: {e.reason}")
+                    print(f"Error: RangeError")
+                    print(e)
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
@@ -65,11 +67,12 @@ class PTZCameraHandler(CameraHandler):
                     ptz = PTZ()
                     print(self.obj.setPTZ(ptz))
                 except RangeError as e:
-                    print(f"Error: {e.reason}")
+                    print(f"Error: RangeError")
+                    print(e)
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
 
             case other:
-                super().handle_action()
+                super().handle_action(action)
 

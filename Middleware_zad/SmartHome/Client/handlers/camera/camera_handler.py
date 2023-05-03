@@ -43,7 +43,7 @@ class CameraHandler:
                     test_connection(self)
                     print(self.obj.startRecording())
                 except AlreadyOnError as e:
-                    print(f"Error: {e.reason}")
+                    print(f"Error: AlreadyON")
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
@@ -53,7 +53,7 @@ class CameraHandler:
                     test_connection(self)
                     print(self.obj.stopRecording())
                 except AlreadyOffError as e:
-                    print(f"Error: {e.reason}")
+                    print(f"Error: Already OFF")
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")

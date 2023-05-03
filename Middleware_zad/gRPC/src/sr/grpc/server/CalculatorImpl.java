@@ -52,7 +52,7 @@ public class CalculatorImpl extends CalculatorImplBase
 		switch (request.getThisType()) {
 			case MAGICIAN -> {
 				Random random = new Random();
-				if (random.nextInt(2) == 0)
+				if (random.nextInt(2) == 1)
 					val = request.getNumber1();
 				else val = request.getNumber2();
 			}
@@ -61,7 +61,8 @@ public class CalculatorImpl extends CalculatorImplBase
 			case AV -> val = (request.getNumber1() + request.getNumber2()) / 2;
 			default -> throw new IllegalStateException("Unexpected value: " + request.getThisType());
 		}
-		NoArithmeticResults result = NoArithmeticResults.newBuilder().setResult(val).setInfo(request.getInfo()).setOtherType(getOtherType(request.getThisType())).build();
+		NoArithmeticResults result = NoArithmeticResults.newBuilder().setInfo(request.getInfo()).setOtherType(getOtherType(request.getThisType())).setResult(val).build();
+		System.out.println(result.getResult());
 		responseObserver.onNext(result);
 		responseObserver.onCompleted();
 	}
