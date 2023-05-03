@@ -8,7 +8,7 @@ import sr.ice.server.SmartDevices.SmartDeviceI;
 
 import java.util.logging.Logger;
 
-public abstract class CameraI extends SmartDeviceI implements Camera {
+public class CameraI extends SmartDeviceI implements Camera {
     private boolean isRecording = false;
     private final Logger logger;
 

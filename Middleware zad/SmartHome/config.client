@@ -1,0 +1,8 @@
+superSmartTv1.Proxy=smartTv/superSmartTv1:tcp -h localhost -p 10000:udp -h localhost -p 10000
+normalSmartTv1.Proxy=smartTv/normalSmartTv1:tcp -h localhost -p 10000:udp -h localhost -p 10000
+
+ptzCamera1.Proxy=camera/ptzCamera1:tcp -h localhost -p 10000:udp -h localhost -p 10000
+
+bulbulator1.Proxy=bulbulator/bulbulator1:tcp -h localhost -p 10000:udp -h localhost -p 10000
+
+# END DEVICE DEFINITIONS

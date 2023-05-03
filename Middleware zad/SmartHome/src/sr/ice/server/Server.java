@@ -1,8 +1,8 @@
 package sr.ice.server;
 
-import SmartHomeDevices.Bulbulator;
-import SmartHomeDevices.PTZCameraPrx;
+
 import com.zeroc.Ice.Communicator;
+import com.zeroc.Ice.Identity;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 import sr.ice.server.SmartDevices.bulbulator.BulbulatorI;
@@ -18,20 +18,33 @@ public class Server {
         Communicator communicator = null;
 
         try {
-            communicator = Util.initialize();
+            communicator = Util.initialize(args);
 
-            ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
+            ObjectAdapter adapter = communicator.createObjectAdapter("Adapter1");
+//            ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
 
             SmartTVI superSmartTv = new SuperSmartTV();
             SmartTVI normalSmartTv = new NormalSmartTV();
+
 
             BulbulatorI bulbulator = new BulbulatorI();
 
             PTZCameraI ptzCamera = new PTZCameraI();
 
+
+            adapter.add(superSmartTv, new Identity("superSmartTv1", "smartTv"));
+            adapter.add(normalSmartTv, new Identity("normalSmartTv1", "smartTv"));
+
+            adapter.add(bulbulator, new Identity("bulbulator1", "bulbulator"));
+
+            adapter.add(ptzCamera, new Identity("ptzCamera1", "camera"));
+
+
             adapter.activate();
 
+
             System.out.println("Entering event processing loop...");
+
 
             communicator.waitForShutdown();
 
