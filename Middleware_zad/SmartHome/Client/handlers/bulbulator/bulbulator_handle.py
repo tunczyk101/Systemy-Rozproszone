@@ -1,5 +1,7 @@
-from client.handlers.basic_functions import test_connection
-from generated_python import *
+import traceback
+
+from handlers.basic_functions import test_connection
+from SmartHomeDevices import *
 import Ice
 
 
@@ -16,10 +18,19 @@ class BulbulatorHandler:
     @property
     def obj(self):
         if not self._obj:
-            base = self.communicator.stringToProxy(self.proxy)
+            base = self.communicator.propertyToProxy(self.proxy)
             self._obj = BulbulatorPrx.checkedCast(base)
 
         return self._obj
+
+
+    def destroy(self):
+        try:
+            print(f"destroying {self.proxy}")
+            self.communicator.destroy()
+        except Exception:
+            traceback.print_exc()
+            status = 1
 
     def print_actions(self):
         print("Actions:")

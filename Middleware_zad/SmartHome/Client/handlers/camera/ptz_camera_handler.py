@@ -1,8 +1,9 @@
 import Ice
 
-# from generated_python import *
-from client.handlers.basic_functions import test_connection
-from client.handlers.camera.camera_handler import CameraHandler
+from SmartHomeDevices import *
+from handlers.basic_functions import test_connection
+from handlers.camera.camera_handler import CameraHandler
+# from smarthome_ice import PTZCameraPrx, PTZ, RangeError
 
 
 class PTZCameraHandler(CameraHandler):
@@ -13,6 +14,8 @@ class PTZCameraHandler(CameraHandler):
         self.device_type = "SmartTv"
         self.actions = ["getPTZ",
                         "setPTZ",
+                        "resetPTZ",
+                        "emptyPTZ",
                         "takePicture",
                         "startRecording",
                         "stopRecording",
@@ -23,7 +26,7 @@ class PTZCameraHandler(CameraHandler):
     @property
     def obj(self):
         if not self._obj:
-            base = self.communicator.stringToProxy(self.proxy)
+            base = self.communicator.propertyToProxy(self.proxy)
             self._obj = PTZCameraPrx.checkedCast(base)
 
         return self._obj
@@ -46,6 +49,27 @@ class PTZCameraHandler(CameraHandler):
                     return
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
+            case "resetPTZ":
+                try:
+                    test_connection(self)
+                    ptz = PTZ(pan=0, tilt=0, zoom=0)
+                    print(self.obj.setPTZ(ptz))
+                except RangeError as e:
+                    print(f"Error: {e.reason}")
+                    return
+                except Ice.ObjectNotExistException:
+                    print("Servant object wasn't found")
+            case "emptyPTZ":
+                try:
+                    test_connection(self)
+                    ptz = PTZ()
+                    print(self.obj.setPTZ(ptz))
+                except RangeError as e:
+                    print(f"Error: {e.reason}")
+                    return
+                except Ice.ObjectNotExistException:
+                    print("Servant object wasn't found")
+
             case other:
                 super().handle_action()
 

@@ -1,9 +1,11 @@
+import traceback
+
 import Ice
 
-from client.handlers.bulbulator.bulbulator_handle import BulbulatorHandler
-from client.handlers.camera.camera_handler import CameraHandler
-from client.handlers.camera.ptz_camera_handler import PTZCameraHandler
-from client.handlers.smartTv.smart_tv_handler import SmartTvHandler
+from handlers.bulbulator.bulbulator_handle import BulbulatorHandler
+from handlers.camera.camera_handler import CameraHandler
+from handlers.camera.ptz_camera_handler import PTZCameraHandler
+from handlers.smartTv.smart_tv_handler import SmartTvHandler
 
 config_file = "config.client"
 
@@ -45,10 +47,9 @@ def print_devices(smart_devices):
 def run(args):
     status = 0
 
-    communicator = None
-
     with Ice.initialize(config_file) as communicator:
         smart_devices = get_devices(communicator)
+        # smart_devices = {"kkk": "lll"}
 
         if not smart_devices:
             print("No devices found in config file")
@@ -63,7 +64,7 @@ def run(args):
             device = input("=>")
 
             if not device or device == "x":
-                exit(0)
+                break
 
             if device not in smart_devices:
                 print("???")
@@ -85,8 +86,28 @@ def run(args):
             except Ice.EndpointParseException:
                 print(f"Incorrect port for device {device.name}, removing it from available devices.")
                 del smart_devices[device.name]
+        print("ending...")
+        smart_devices.get("bulbulator1").destroy()
+        # for device in smart_devices.values():
+        #     if device.communicator is not None:
+        #         print('destroy')
+        #         try:
+        #             device.communicator.destroy()
+        #         except Exception as e:
+        #             print(f"Error: {e.args}")
+        #             traceback.print_exc()
+        #             status = 1
+        if communicator is not None:
+            print('destroy')
+            try:
+                communicator.destroy()
+            except Exception:
+                traceback.print_exc()
+                status = 1
+
+
+        exit(status)
 
 
 if __name__ == "__main__":
     run(None)
-

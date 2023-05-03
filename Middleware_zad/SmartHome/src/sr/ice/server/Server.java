@@ -20,8 +20,8 @@ public class Server {
         try {
             communicator = Util.initialize(args);
 
-            ObjectAdapter adapter = communicator.createObjectAdapter("Adapter1");
-//            ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
+//            ObjectAdapter adapter = communicator.createObjectAdapter("Adapter1");
+            ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
 
             SmartTVI superSmartTv = new SuperSmartTV();
             SmartTVI normalSmartTv = new NormalSmartTV();

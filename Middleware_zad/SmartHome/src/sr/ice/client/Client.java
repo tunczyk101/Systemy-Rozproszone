@@ -35,8 +35,8 @@ public class Client {
 
                 switch (line) {
                     case "superSmartTv":
-                        obj = communicator.propertyToProxy("superSmartTv1.Proxy");
-
+                        obj = communicator.propertyToProxy("superSmartTv1");
+                        System.out.println(obj);
                         tvobj = SmartTVPrx.checkedCast(obj);
                         if (tvobj == null) {
                             throw new Error("Invalid proxy");
