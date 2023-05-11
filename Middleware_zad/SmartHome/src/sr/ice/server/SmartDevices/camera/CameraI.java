@@ -17,6 +17,7 @@ public class CameraI extends SmartDeviceI implements Camera {
         this.logger = logger;
     }
 
+
     @Override
     public boolean takePicture(Current current) {
         System.out.println("Pstryk");

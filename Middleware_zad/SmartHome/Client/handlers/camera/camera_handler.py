@@ -26,6 +26,7 @@ class CameraHandler:
         return self._obj
 
     def print_actions(self):
+        print("\n=================================\n")
         print("Actions:")
         for action in self.actions:
             print(f"- {action}")
@@ -35,13 +36,15 @@ class CameraHandler:
             case "takePicture":
                 try:
                     test_connection(self)
-                    print(self.obj.takePicture())
+                    if self.obj.takePicture():
+                        print("Picture was taken")
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
             case "startRecording":
                 try:
                     test_connection(self)
-                    print(self.obj.startRecording())
+                    if self.obj.startRecording():
+                        print("Started Recording")
                 except AlreadyOnError as e:
                     print(f"Error: AlreadyON")
                     return
@@ -51,7 +54,8 @@ class CameraHandler:
             case "stopRecording":
                 try:
                     test_connection(self)
-                    print(self.obj.stopRecording())
+                    if self.obj.stopRecording():
+                        print("Stoped Recording")
                 except AlreadyOffError as e:
                     print(f"Error: Already OFF")
                     return
@@ -60,13 +64,13 @@ class CameraHandler:
             case "isRecording":
                 try:
                     test_connection(self)
-                    print(self.obj.isRecording())
+                    print(f"Recording: {self.obj.isRecording()}")
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
             case "getName":
                 try:
                     test_connection(self)
-                    print(self.obj.getName())
+                    print(f"Name: {self.obj.getName()}")
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
             case other:

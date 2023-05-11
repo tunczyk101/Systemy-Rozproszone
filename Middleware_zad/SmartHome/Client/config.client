@@ -3,6 +3,8 @@ normalSmartTv1=smartTv/normalSmartTv1:tcp -h localhost -p 10000:udp -h localhost
 
 ptzCamera1=camera/ptzCamera1:tcp -h localhost -p 10000:udp -h localhost -p 10000
 
+camera1=camera/camera1:tcp -h localhost -p 10000:udp -h localhost -p 10000
+
 bulbulator1=bulbulator/bulbulator1:tcp -h localhost -p 10000:udp -h localhost -p 10000
 
 # END DEVICE DEFINITIONS

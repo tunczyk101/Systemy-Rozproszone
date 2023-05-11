@@ -8,15 +8,12 @@ module SmartHomeDevices
     exception AlreadyOnError {}
 
     interface SmartDevice {
-        bool turnOn() throws AlreadyOnError;
-        bool turnOff() throws AlreadyOffError;
-        bool isOn();
         string getName();
     };
 
     interface Bulbulator extends SmartDevice
       {
-    	  void bulbul();
+    	  bool bulbul();
       }
 
     interface Camera extends SmartDevice {
@@ -41,7 +38,7 @@ module SmartHomeDevices
 
     interface PTZCamera extends Camera{
         idempotent PTZ getPTZ();
-        idempotent bool setPTZ(PTZ ptz) throws RangeError;
+        bool setPTZ(PTZ ptz) throws RangeError;
     };
 
 

@@ -8,7 +8,7 @@ import com.zeroc.Ice.Current;
 import java.util.logging.Logger;
 
 public class PTZCameraI extends CameraI implements PTZCamera {
-    private static final Logger logger = Logger.getLogger(CameraI.class.getName());
+    private static final Logger logger = Logger.getLogger(PTZCameraI.class.getName());
 
     private short pan = 0;
     private short tilt = 0;

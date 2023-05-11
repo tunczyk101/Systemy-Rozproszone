@@ -20,14 +20,13 @@ class SmartTvHandler:
     @property
     def obj(self):
         if not self._obj:
-            print(self.proxy)
             base = self.communicator.propertyToProxy(self.proxy)
-            print(base)
             self._obj = SmartTVPrx.checkedCast(base)
 
         return self._obj
 
     def print_actions(self):
+        print("\n=================================\n")
         print("Actions:")
         for action in self.actions:
             print(f"- {action}")
@@ -37,7 +36,8 @@ class SmartTvHandler:
             case "changeChannel 1":
                 try:
                     test_connection(self)
-                    print(self.obj.changeChannel(1))
+                    if self.obj.changeChannel(1):
+                        print(f"Channel changed to 1")
                 except RangeError as e:
                     print(f"Error: RangeError")
                     print(e)
@@ -48,7 +48,8 @@ class SmartTvHandler:
             case "changeChannel 8":
                 try:
                     test_connection(self)
-                    print(self.obj.changeChannel(8))
+                    if self.obj.changeChannel(8):
+                        print(f"Channel changed to 8")
                 except RangeError as e:
                     print(f"Error: RangeError")
                     print(e)
@@ -59,7 +60,8 @@ class SmartTvHandler:
             case "changeChannel 30":
                 try:
                     test_connection(self)
-                    print(self.obj.changeChannel(30))
+                    if self.obj.changeChannel(30):
+                        print(f"Channel changed to 30")
                 except RangeError as e:
                     print(f"Error: RangeError")
                     print(e)
@@ -70,14 +72,14 @@ class SmartTvHandler:
             case "getCurrentChannel":
                 try:
                     test_connection(self)
-                    print(self.obj.getCurrentChannel())
+                    print(f"Current channel: {self.obj.getCurrentChannel()}")
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
                     return
             case "getName":
                 try:
                     test_connection(self)
-                    print(self.obj.getName())
+                    print(f"Name: {self.obj.getName()}")
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
                     return

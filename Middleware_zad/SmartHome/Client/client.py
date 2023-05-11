@@ -39,7 +39,7 @@ def get_devices(communicator):
 
 
 def print_devices(smart_devices):
-    print("Available smart devices:")
+    print("\nAvailable smart devices:")
     for device in smart_devices:
         print(f"- {device}")
 
@@ -86,6 +86,9 @@ def run(args):
             except Ice.EndpointParseException:
                 print(f"Incorrect port for device {device.name}, removing it from available devices.")
                 del smart_devices[device.name]
+
+            print("____________________________________________________________\n")
+
         print("ending...")
         # smart_devices.get("bulbulator1").destroy()
         for device in smart_devices.values():

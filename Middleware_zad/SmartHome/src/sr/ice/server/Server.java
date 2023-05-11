@@ -1,15 +1,19 @@
 package sr.ice.server;
 
 
+import SmartHomeDevices.PTZCamera;
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Identity;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 import sr.ice.server.SmartDevices.bulbulator.BulbulatorI;
+import sr.ice.server.SmartDevices.camera.CameraI;
 import sr.ice.server.SmartDevices.camera.PTZCameraI;
 import sr.ice.server.SmartDevices.smartTV.NormalSmartTV;
 import sr.ice.server.SmartDevices.smartTV.SmartTVI;
 import sr.ice.server.SmartDevices.smartTV.SuperSmartTV;
+
+import java.util.logging.Logger;
 
 public class Server {
 
@@ -30,6 +34,7 @@ public class Server {
             BulbulatorI bulbulator = new BulbulatorI();
 
             PTZCameraI ptzCamera = new PTZCameraI();
+            CameraI camera = new CameraI("Camera", Logger.getLogger(CameraI.class.getName()));
 
 
             adapter.add(superSmartTv, new Identity("superSmartTv1", "smartTv"));
@@ -38,6 +43,7 @@ public class Server {
             adapter.add(bulbulator, new Identity("bulbulator1", "bulbulator"));
 
             adapter.add(ptzCamera, new Identity("ptzCamera1", "camera"));
+            adapter.add(camera, new Identity("camera1", "camera"));
 
 
             adapter.activate();

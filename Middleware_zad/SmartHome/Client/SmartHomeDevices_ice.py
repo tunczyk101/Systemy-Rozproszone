@@ -65,42 +65,6 @@ if 'SmartDevicePrx' not in _M_SmartHomeDevices.__dict__:
     _M_SmartHomeDevices.SmartDevicePrx = Ice.createTempClass()
     class SmartDevicePrx(Ice.ObjectPrx):
 
-        def turnOn(self, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_turnOn.invoke(self, ((), context))
-
-        def turnOnAsync(self, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_turnOn.invokeAsync(self, ((), context))
-
-        def begin_turnOn(self, _response=None, _ex=None, _sent=None, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_turnOn.begin(self, ((), _response, _ex, _sent, context))
-
-        def end_turnOn(self, _r):
-            return _M_SmartHomeDevices.SmartDevice._op_turnOn.end(self, _r)
-
-        def turnOff(self, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_turnOff.invoke(self, ((), context))
-
-        def turnOffAsync(self, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_turnOff.invokeAsync(self, ((), context))
-
-        def begin_turnOff(self, _response=None, _ex=None, _sent=None, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_turnOff.begin(self, ((), _response, _ex, _sent, context))
-
-        def end_turnOff(self, _r):
-            return _M_SmartHomeDevices.SmartDevice._op_turnOff.end(self, _r)
-
-        def isOn(self, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_isOn.invoke(self, ((), context))
-
-        def isOnAsync(self, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_isOn.invokeAsync(self, ((), context))
-
-        def begin_isOn(self, _response=None, _ex=None, _sent=None, context=None):
-            return _M_SmartHomeDevices.SmartDevice._op_isOn.begin(self, ((), _response, _ex, _sent, context))
-
-        def end_isOn(self, _r):
-            return _M_SmartHomeDevices.SmartDevice._op_isOn.end(self, _r)
-
         def getName(self, context=None):
             return _M_SmartHomeDevices.SmartDevice._op_getName.invoke(self, ((), context))
 
@@ -142,15 +106,6 @@ if 'SmartDevicePrx' not in _M_SmartHomeDevices.__dict__:
         def ice_staticId():
             return '::SmartHomeDevices::SmartDevice'
 
-        def turnOn(self, current=None):
-            raise NotImplementedError("servant method 'turnOn' not implemented")
-
-        def turnOff(self, current=None):
-            raise NotImplementedError("servant method 'turnOff' not implemented")
-
-        def isOn(self, current=None):
-            raise NotImplementedError("servant method 'isOn' not implemented")
-
         def getName(self, current=None):
             raise NotImplementedError("servant method 'getName' not implemented")
 
@@ -162,9 +117,6 @@ if 'SmartDevicePrx' not in _M_SmartHomeDevices.__dict__:
     _M_SmartHomeDevices._t_SmartDeviceDisp = IcePy.defineClass('::SmartHomeDevices::SmartDevice', SmartDevice, (), None, ())
     SmartDevice._ice_type = _M_SmartHomeDevices._t_SmartDeviceDisp
 
-    SmartDevice._op_turnOn = IcePy.Operation('turnOn', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (), (), ((), IcePy._t_bool, False, 0), (_M_SmartHomeDevices._t_AlreadyOnError,))
-    SmartDevice._op_turnOff = IcePy.Operation('turnOff', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (), (), ((), IcePy._t_bool, False, 0), (_M_SmartHomeDevices._t_AlreadyOffError,))
-    SmartDevice._op_isOn = IcePy.Operation('isOn', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (), (), ((), IcePy._t_bool, False, 0), ())
     SmartDevice._op_getName = IcePy.Operation('getName', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (), (), ((), IcePy._t_string, False, 0), ())
 
     _M_SmartHomeDevices.SmartDevice = SmartDevice
@@ -228,7 +180,7 @@ if 'BulbulatorPrx' not in _M_SmartHomeDevices.__dict__:
     _M_SmartHomeDevices._t_BulbulatorDisp = IcePy.defineClass('::SmartHomeDevices::Bulbulator', Bulbulator, (), None, (_M_SmartHomeDevices._t_SmartDeviceDisp,))
     Bulbulator._ice_type = _M_SmartHomeDevices._t_BulbulatorDisp
 
-    Bulbulator._op_bulbul = IcePy.Operation('bulbul', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (), (), None, ())
+    Bulbulator._op_bulbul = IcePy.Operation('bulbul', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (), (), ((), IcePy._t_bool, False, 0), ())
 
     _M_SmartHomeDevices.Bulbulator = Bulbulator
     del Bulbulator
@@ -471,7 +423,7 @@ if 'PTZCameraPrx' not in _M_SmartHomeDevices.__dict__:
     PTZCamera._ice_type = _M_SmartHomeDevices._t_PTZCameraDisp
 
     PTZCamera._op_getPTZ = IcePy.Operation('getPTZ', Ice.OperationMode.Idempotent, Ice.OperationMode.Idempotent, False, None, (), (), (), ((), _M_SmartHomeDevices._t_PTZ, False, 0), ())
-    PTZCamera._op_setPTZ = IcePy.Operation('setPTZ', Ice.OperationMode.Idempotent, Ice.OperationMode.Idempotent, False, None, (), (((), _M_SmartHomeDevices._t_PTZ, False, 0),), (), ((), IcePy._t_bool, False, 0), (_M_SmartHomeDevices._t_RangeError,))
+    PTZCamera._op_setPTZ = IcePy.Operation('setPTZ', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_SmartHomeDevices._t_PTZ, False, 0),), (), ((), IcePy._t_bool, False, 0), (_M_SmartHomeDevices._t_RangeError,))
 
     _M_SmartHomeDevices.PTZCamera = PTZCamera
     del PTZCamera

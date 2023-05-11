@@ -36,14 +36,15 @@ class PTZCameraHandler(CameraHandler):
             case "getPTZ":
                 try:
                     test_connection(self)
-                    print(self.obj.getPTZ())
+                    print(f"PTZ settings: \n{self.obj.getPTZ()}")
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
             case "setPTZ":
                 try:
                     test_connection(self)
                     ptz = PTZ(pan=20, tilt=88)
-                    print(self.obj.setPTZ(ptz))
+                    if self.obj.setPTZ(ptz):
+                        print(f"Changed values: {ptz}\n")
                 except RangeError as e:
                     print(f"Error: RangeError")
                     print(e)
@@ -54,7 +55,8 @@ class PTZCameraHandler(CameraHandler):
                 try:
                     test_connection(self)
                     ptz = PTZ(pan=0, tilt=0, zoom=0)
-                    print(self.obj.setPTZ(ptz))
+                    if self.obj.setPTZ(ptz):
+                        print(f"Changed values: {ptz}\n")
                 except RangeError as e:
                     print(f"Error: RangeError")
                     print(e)
@@ -65,7 +67,8 @@ class PTZCameraHandler(CameraHandler):
                 try:
                     test_connection(self)
                     ptz = PTZ()
-                    print(self.obj.setPTZ(ptz))
+                    if self.obj.setPTZ(ptz):
+                        print(f"Changed values: {ptz}\n")
                 except RangeError as e:
                     print(f"Error: RangeError")
                     print(e)

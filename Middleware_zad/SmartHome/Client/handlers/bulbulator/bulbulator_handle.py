@@ -23,7 +23,6 @@ class BulbulatorHandler:
 
         return self._obj
 
-
     def destroy(self):
         try:
             print(f"destroying {self.proxy}")
@@ -33,6 +32,7 @@ class BulbulatorHandler:
             status = 1
 
     def print_actions(self):
+        print("\n=================================\n")
         print("Actions:")
         for action in self.actions:
             print(f"- {action}")
@@ -42,17 +42,17 @@ class BulbulatorHandler:
             case "bulbul":
                 try:
                     test_connection(self)
-                    print(self.obj.bulbul())
+                    if self.obj.bulbul():
+                        print("bulul")
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
                     return
             case "getName":
                 try:
                     test_connection(self)
-                    print(self.obj.getName())
+                    print(f"Name: {self.obj.getName()}")
                 except Ice.ObjectNotExistException:
                     print("Servant object wasn't found")
                     return
             case other:
                 print("???")
-

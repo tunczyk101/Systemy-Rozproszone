@@ -14,8 +14,9 @@ public class BulbulatorI extends SmartDeviceI implements Bulbulator {
     }
 
     @Override
-    public void bulbul(Current current) {
+    public boolean bulbul(Current current) {
         logger.info("Bulbulator: bulul");
         System.out.println("bulul");
+        return true;
     }
 }
