@@ -26,7 +26,7 @@ public class Admin {
         System.out.println(ConsoleColors.CONFIG + "ADMIN READY" + ConsoleColors.RESET);
 
         while (true) {
-            System.out.println(ConsoleColors.INFO + "Write your message using target:message format" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.INFO + "Write your message using 'target.message' format" + ConsoleColors.RESET);
             System.out.println(ConsoleColors.INFO + "Available targets: agencies / carriers / all \n" + ConsoleColors.RESET);
 
             String msg = reader.readLine();
@@ -35,7 +35,7 @@ public class Admin {
                 break;
             }
 
-            String[] msg_parts = msg.split(":");
+            String[] msg_parts = msg.split("\\.");
 
             if (msg_parts.length != 2){
                 System.out.println(ConsoleColors.INFO + "Incorrect message format" + ConsoleColors.RESET);
@@ -45,7 +45,7 @@ public class Admin {
             Optional.ofNullable(keymap.get(msg_parts[0])).ifPresentOrElse(
                     key ->
                     {
-                        String admin_msg = "admin:null:" + msg_parts[1];
+                        String admin_msg = "admin.null." + msg_parts[1];
                         try {
                             writer.send(key, admin_msg);
                             System.out.println("Sent: " + admin_msg + " to: " + msg_parts[0] + "\n");

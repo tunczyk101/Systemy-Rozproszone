@@ -43,7 +43,7 @@ public class Agency{
 
         while (true){
             System.out.println(ConsoleColors.INFO + "Choose service: people / load / satellite");
-            System.out.println("Format: service:data\n" + ConsoleColors.RESET);
+            System.out.println("Format: service.data\n" + ConsoleColors.RESET);
 
             String chosenService = reader.readLine();
 
@@ -52,11 +52,11 @@ public class Agency{
                 break;
             }
 
-            String[] service_parts = chosenService.split(":");
+            String[] service_parts = chosenService.split("\\.");
 
             if (service_parts.length != 2){
                 System.out.println(ConsoleColors.INFO + "Incorrect msg format");
-                System.out.println("Enter data after ':' or don't use ':' as part of data\n" + ConsoleColors.RESET);
+                System.out.println("Enter data after '.' or don't use '.' as part of data\n" + ConsoleColors.RESET);
                 continue;
             }
 
@@ -69,7 +69,7 @@ public class Agency{
                         {
                             try {
                                 String id = Integer.toString(ThreadLocalRandom.current().nextInt(0, 1000));
-                                String msg = agencyID + ":" + id + ":" + data;
+                                String msg = agencyID + "." + id + "." + data;
 
                                 serviceWriter.send(msg);
 

@@ -61,13 +61,18 @@ public class Carrier implements Runnable{
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Enter agency ID:");
+        System.out.println("Enter carrier ID:");
         id = reader.readLine();
         
         if (availableServices.size() != 2)
             addAvailableServices(reader);
 
         System.out.println("CARRIER READY" + ConsoleColors.RESET);
+        System.out.println("Available services:");
+
+        for (String service : availableServices){
+            System.out.println("\t- " + service);
+        }
     }
 
     private void processData(String data){
@@ -83,7 +88,7 @@ public class Carrier implements Runnable{
 
             Consumer<String> consumer = msg ->
             {
-                String[] service_parts = msg.split(":");
+                String[] service_parts = msg.split("\\.");
                 if (service_parts.length != 3)
                     System.out.println(ConsoleColors.INFO + "Incorrect form from sender" + ConsoleColors.RESET);
                 else {
@@ -93,7 +98,7 @@ public class Carrier implements Runnable{
 
                     processData(data);
 
-                    String response = id + ":" + serviceId + ":" + "service_finished";
+                    String response = id + "." + serviceId + "." + "service_finished";
                     String senderKey = "spacex.agencies." + sender;
 
                     try {
